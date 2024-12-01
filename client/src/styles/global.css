@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('./font.css');
+
+@layer base {
+  * {
+    @apply box-border text-white-light;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  body {
+    @apply bg-black m-0 p-0;
+  }
+
+  input {
+    @apply border-none outline-none bg-transparent p-0 w-full;
+  }
+
+  ul,
+  ol {
+    @apply list-none;
+  }
+}
+
+@layer components {
+  .active {
+    @apply font-bold;
+  }
+
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+
+  .flex-between {
+    @apply flex justify-between;
+  }
+
+  .flex-column {
+    @apply flex flex-col justify-center;
+  }
+
+  .margin-auto {
+    @apply mx-auto my-0;
+  }
+}
