@@ -1,38 +1,59 @@
-import type { Path } from '@/router';
+import type { Path } from "@/router";
 
-import { NavLink, useLocation } from 'react-router-dom';
-import { HomeOutlined, HomeFilled, ExploreOutlined, ExploreFilled, NotificationOutlined, NotificationFilled, ProfileOutlined, ProfileFilled } from '@/icons';
-import clsx from 'clsx';
+import { createElement } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { Home, Explore, Notification, Profile } from "@/icons";
+import { cn } from "@/utils";
 
 type MenuItem = {
   title: string;
   path: Path;
-  icon: Record<'default' | 'active', React.ReactNode>;
+  icon: React.ComponentType<React.SVGAttributes<SVGSVGElement>>;
 };
 
 const menuItems: MenuItem[] = [
-  { title: '홈', path: '/', icon: { default: <HomeOutlined />, active: <HomeFilled /> } },
-  { title: '탐색하기', path: '/explore', icon: { default: <ExploreOutlined />, active: <ExploreFilled /> } },
-  { title: '알림', path: '/notifications', icon: { default: <NotificationOutlined />, active: <NotificationFilled /> } },
-  { title: '프로필', path: '/profile', icon: { default: <ProfileOutlined />, active: <ProfileFilled /> } },
+  { title: "홈", path: "/", icon: Home },
+  { title: "탐색하기", path: "/explore", icon: Explore },
+  { title: "알림", path: "/notifications", icon: Notification },
+  { title: "프로필", path: "/profile", icon: Profile },
 ];
 
 export default function Menu() {
   const { pathname } = useLocation();
 
   return (
-    <ul>
-      {menuItems.map(({ title, path, icon }) => (
-        <li key={path}>
-          <NavLink
-            to={path}
-            className={({ isActive }) => clsx('flex items-center gap-4 p-3 rounded-full transition-all hover:bg-white-light/10', { active: isActive })}
-          >
-            {path === pathname ? icon.active : icon.default}
-            <span className="text-xl">{title}</span>
-          </NavLink>
-        </li>
-      ))}
+    <ul className="my-6 w-full">
+      {menuItems.map(({ title, path, icon }) => {
+        const isMatch = path === pathname;
+        return (
+          <li key={path}>
+            <NavLink
+              to={path}
+              className={({ isActive }) =>
+                cn(
+                  "flex-center mb-2 rounded-full p-3 text-gray-800 hover:bg-white-light/10 xl:justify-start dark:hover:text-blue-400",
+                  { "bg-white-light/10 font-bold text-primary": isActive },
+                )
+              }
+            >
+              {createElement(icon, {
+                className: cn(
+                  "h-6 w-6",
+                  isMatch ? "fill-primary" : "fill-white-light",
+                ),
+              })}
+              <span
+                className={cn(
+                  "hidden text-xl xl:ml-4 xl:block",
+                  isMatch ? "text-primary" : "text-white-light",
+                )}
+              >
+                {title}
+              </span>
+            </NavLink>
+          </li>
+        );
+      })}
     </ul>
   );
 }

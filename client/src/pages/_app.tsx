@@ -1,18 +1,19 @@
-import { Header, Sidebar } from '@/layout';
-import { Outlet } from 'react-router-dom';
+import { Suspense } from "react";
+import { Outlet } from "react-router-dom";
+import { Header, Sidebar } from "@/layout";
 
 export default function AppLayout() {
   return (
-    <div className="max-w-[1260px] margin-auto">
-      <Header />
+    <Suspense fallback="Loading...">
+      <div className="container mx-auto flex h-screen xl:max-w-[1200px]">
+        <Header />
 
-      <main className="flex-between ml-[280px] h-screen">
-        <section className="w-full max-w-[600px] border-x border-white-dark">
+        <main className="h-screen w-full max-w-[600px] overflow-y-auto border-x border-white-dark px-4">
           <Outlet />
-        </section>
+        </main>
 
         <Sidebar />
-      </main>
-    </div>
+      </div>
+    </Suspense>
   );
 }

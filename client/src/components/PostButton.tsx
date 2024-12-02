@@ -1,14 +1,16 @@
-import { useModals } from '@/router';
+import { Tweet } from "@/icons";
+import { useModals } from "@/router";
 
 export default function PostButton() {
-  const modals = useModals();
+  const { open } = useModals();
 
   return (
     <button
-      className="bg-primary px-8 py-4 rounded-full w-full max-w-60 font-bold hover:opacity-85 hover:transition-opacity"
-      onClick={() => modals.open('/post')}
+      className="flex-center h-12 w-12 max-w-60 rounded-full bg-primary font-bold transition-opacity hover:opacity-80 xl:w-full xl:px-6 xl:py-4"
+      onClick={() => open("/post", { replace: true, viewTransition: true })}
     >
-      게시하기
+      <span className="hidden xl:block">게시하기</span>
+      <Tweet className="block h-6 w-6 fill-white-light xl:hidden" />
     </button>
   );
 }

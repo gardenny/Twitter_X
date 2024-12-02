@@ -2,20 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('./font.css');
+@import url("./font.css");
 
 @layer base {
   * {
     @apply box-border text-white-light;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: "Noto Sans KR", sans-serif;
   }
 
   body {
-    @apply bg-black m-0 p-0;
+    @apply m-0 bg-black p-0;
   }
 
   input {
-    @apply border-none outline-none bg-transparent p-0 w-full;
+    @apply w-full border-none bg-transparent p-0 outline-none;
   }
 
   ul,
@@ -25,12 +25,8 @@
 }
 
 @layer components {
-  .active {
-    @apply font-bold;
-  }
-
   .flex-center {
-    @apply flex justify-center items-center;
+    @apply flex items-center justify-center;
   }
 
   .flex-between {
@@ -48,4 +44,17 @@
   .translate-center {
     @apply translate-x-1/2 translate-y-1/2;
   }
+}
+
+/***** Scrollbar *****/
+::-webkit-scrollbar {
+  @apply w-3;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-zinc-800 hover:bg-zinc-700 active:bg-zinc-600;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-neutral-900;
 }
